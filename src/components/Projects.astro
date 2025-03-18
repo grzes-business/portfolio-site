@@ -1,0 +1,240 @@
+---
+const projects = [
+  {
+    title: 'Opyleo Landing Page',
+    description: 'Led the development of a mobile landing page for a book selling app, managing the team and ensuring project success.',
+    tags: ['Team Lead', 'Mobile First', 'Landing Page'],
+    image: 'opyleo.png',
+    fullDescription: `
+      As the team lead for the Opyleo Landing Page project, I was responsible for:
+      • Managing a team of developers and designers
+      • Implementing mobile-first design principles
+      • Ensuring high performance and SEO optimization
+      • Coordinating with stakeholders to meet project requirements
+      • Delivering the project within the specified timeline
+    `,
+    technologies: ['HTML', 'CSS', 'JavaScript', 'Mobile-First Design', 'SEO'],
+    role: 'Team Lead & Lead Developer',
+    duration: '2 months'
+  },
+  {
+    title: 'Newsletter Integration',
+    description: 'Created custom newsletter forms with MailerLite integration for improved user engagement.',
+    tags: ['MailerLite', 'Forms', 'Integration'],
+    image: 'newsletter.jpg',
+    fullDescription: `
+      Developed two distinct newsletter integration solutions:
+      • Custom-designed subscription forms
+      • Seamless MailerLite API integration
+      • Analytics tracking implementation
+      • A/B testing capabilities
+      • GDPR-compliant data collection
+    `,
+    technologies: ['Astro.js', 'TailwindCSS', 'JavaScript', 'MailerLite API'],
+    role: 'Frontend Developer',
+    duration: '3 weeks'
+  },
+  {
+    title: 'Video Guide Platform',
+    description: 'Developed a two-part video guide platform with user registration and content delivery.',
+    tags: ['Video Platform', 'MailerLite', 'Educational'],
+    image: 'video-guide.jpg',
+    fullDescription: `
+      Created a comprehensive video guide platform featuring:
+      • Secure user registration and authentication
+      • Custom video player with progress tracking
+      • Responsive design for all devices
+      • Protected content delivery system
+      • User progress persistence
+    `,
+    technologies: ['Video.js', 'User Authentication', 'Responsive Design'],
+    role: 'Full Stack Developer',
+    duration: '1.5 months'
+  }
+];
+---
+
+<section id="projects" class="py-20 px-4 bg-zinc-900/50">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-4xl font-bold text-center mb-16">Featured Work</h2>
+    
+    <div id="project-list" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {projects.map((project, index) => (
+        <div 
+          class="bg-zinc-800/50 rounded-xl overflow-hidden hover:transform hover:-translate-y-2 transition-transform cursor-pointer"
+        >
+          <img src={project.image} alt={project.title} class="w-full h-48 object-cover" />
+          <div class="p-6">
+            <p class="text-zinc-400 mb-4">{project.description}</p>
+            <div class="flex flex-wrap gap-2">
+              {project.tags.map(tag => (
+                <span class="px-3 py-1 bg-zinc-700/50 rounded-full text-sm text-zinc-300">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+  <!-- Project Modal -->
+  <div id="project-modals">
+  {projects.map((project, index) => (
+    <div
+      class="fixed inset-0 flex items-center justify-center p-4 z-50 bg-black/60 backdrop-blur-sm opacity-0 transition-all duration-300"
+    >
+      <div class="modal-content bg-zinc-900/90 backdrop-blur-md rounded-lg max-w-2xl w-full scale-95 opacity-0 max-h-[80vh] transition-all duration-300 shadow-xl border border-zinc-700/50 overflow-y-auto scrollbar-hide relative">
+        <!-- Header area with sticky close button -->
+        <div class="sticky top-0 z-10 bg-zinc-900/90 backdrop-blur-md pt-8 pb-4 px-8">
+          <div class="flex justify-between items-start">
+            <h3 class="text-2xl font-bold">{project.title}</h3>
+            <button 
+              class="project-close-btn text-zinc-400 hover:text-white -mt-2 -mr-2 p-1"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Content area -->
+        <div class="p-8 pt-0">
+          <img src={project.image} alt={project.title} class="aspect-[3/2] w-full object-cover rounded-lg mb-6" />
+          
+          <div class="space-y-4">
+            <div>
+              <h4 class="text-lg font-semibold mb-2">Project Overview</h4>
+              <p class="text-zinc-400 whitespace-pre-line">{project.fullDescription}</p>
+            </div>
+            
+            <div>
+              <h4 class="text-lg font-semibold mb-2">Technologies Used</h4>
+              <div class="flex flex-wrap gap-2">
+                {project.technologies.map(tech => (
+                  <span class="px-3 py-1 bg-zinc-800 rounded-full text-sm text-zinc-300">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <h4 class="text-lg font-semibold mb-2">Role</h4>
+                <p class="text-zinc-400">{project.role}</p>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold mb-2">Duration</h4>
+                <p class="text-zinc-400">{project.duration}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
+  </div>
+  <script>
+    function initialiseScript() {
+      const modalsContainer = document.getElementById('project-modals');
+      const projectList = document.getElementById('project-list');  
+      if (modalsContainer && projectList) {
+        Array.from(modalsContainer.children).forEach(modal => {
+          // Hide all modals initially
+          modal.classList.add('hidden', 'opacity-0');
+          
+          // Find the modal content div (first child of the modal)
+          const modalContent = modal.querySelector('.modal-content');
+
+          // Find the close button in each modal and add click event
+          const closeButton = modal.querySelector('button');
+          if (closeButton) {
+            closeButton.addEventListener('click', () => {
+              closeModal(modal, modalContent);
+            });
+          }
+        });
+
+        // Function to open modal with animation
+        const openModal = (modal: any, modalContent: any) => {
+          // First remove hidden class
+          modal.classList.remove('hidden');
+          modalContent.classList.remove('hidden');
+          
+          // Force browser reflow
+          void modal.offsetWidth;
+          
+          // Then add visible classes
+          modal.classList.add('opacity-100');
+          modal.classList.remove('opacity-0');
+          
+          if (modalContent) {
+            modalContent.classList.add('scale-100', 'opacity-100');
+            modalContent.classList.remove('scale-95', 'opacity-0');
+          }
+          
+          // Prevent body scrolling
+          document.body.style.overflow = 'hidden';
+        };
+
+        // Function to close modal with animation
+        const closeModal = (modal: any, modalContent: any) => {
+          // First remove visible classes
+          modal.classList.remove('opacity-100');
+          modal.classList.add('opacity-0');
+          
+          if (modalContent) {
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+          }
+          
+          // Wait for transition to complete before hiding
+          modal.addEventListener('transitionend', function hideModal() {
+            modal.classList.add('hidden');
+            modalContent.classList.add('hidden');
+            document.body.style.overflow = '';
+            modal.removeEventListener('transitionend', hideModal);
+          }, {once: true});
+        };
+
+        // Add click event to each project
+        Array.from(projectList.children).forEach((project, index) => {
+          project.addEventListener('click', () => {
+            const modal = modalsContainer.children[index];
+            const modalContent = modal.querySelector('.modal-content');
+            if (modal && modalContent) {
+              openModal(modal, modalContent);
+            }
+          });
+        });
+
+        // Close modal when clicking outside (on the background)
+        document.addEventListener('click', (event) => {
+          Array.from(modalsContainer.children).forEach(modal => {
+            const modalContent = modal.querySelector('.modal-content');
+            if (event.target === modal && !modal.classList.contains('hidden')) {
+              closeModal(modal, modalContent);
+            }
+          });
+        });
+
+        // Close modal when pressing Escape key
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') {
+            const visibleModal = Array.from(modalsContainer.children).find(
+          modal => !modal.classList.contains('hidden')
+            );
+            const modalContent = visibleModal?.querySelector('.modal-content');
+            if (visibleModal) {
+              closeModal(visibleModal, modalContent);
+            }
+          }
+        });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {initialiseScript();});
+  </script>
+</section>

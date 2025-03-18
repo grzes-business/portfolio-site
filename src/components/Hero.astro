@@ -1,0 +1,69 @@
+---
+// Import any necessary components or utilities
+import { Icon } from 'astro-icon/components';
+---
+
+
+<section class="min-h-screen flex items-center justify-center px-4 py-16 relative overflow-hidden">
+  <!-- Background effect (subtle gradient or particles) -->
+  <div class="absolute inset-0 bg-gradient-to-br from-zinc-900 to-black opacity-50 z-0"></div>
+  
+  <img 
+    src="/call_up_memoji.png" 
+    alt="Grzegorz's Memoji" 
+    class="z-10 animate-float absolute bottom-0 -right-32 lg:w-[52rem] w-[36rem]"
+  />
+  <!-- Main content -->
+  <div class="max-w-6xl w-full flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-12 z-10">
+    <!-- Left column: Text content -->
+    <div class="flex justify-center flex-col w-full md:w-1/2 text-center md:text-left">
+      <span class="text-blue-400 font-medium mb-4 tracking-wider">PASSIONATE BUILDER - FRONTEND DEVELOPER</span>
+      
+      <h1 class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text mb-4">
+        Hey, I'm <span class="inline-block pb-4">Grzegorz</span>
+      </h1>
+      
+      <p class="text-xl md:text-2xl text-zinc-400 mb-8 max-w-xl">
+        I make ideas happen with web technologies. <span class="inline-block">I am disciplined, self-motivated, and always eager to learn.</span>
+      </p>
+      
+      <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+        <a 
+          href="#projects" 
+          class="inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full text-white font-medium hover:opacity-90 transition-all hover:shadow-lg hover:shadow-blue-500/20"
+        >
+          View My Work
+        </a>
+        <a 
+          href="#contact" 
+          class="inline-block px-8 py-4 bg-transparent border border-zinc-700 rounded-full text-white font-medium hover:border-blue-400 transition-all"
+        >
+          Let's Connect
+        </a>
+      </div>
+      
+      <!-- Social links -->
+      <div class="flex gap-4 mt-8 justify-center md:justify-start">
+        <a href="https://github.com/yourgithub" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white transition-colors">
+          <Icon name="simple-icons:github" class="w-6 h-6" />
+          <span class="sr-only">GitHub</span>
+        </a>
+        <a href="https://linkedin.com/in/yourlinkedin" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white transition-colors">
+          <Icon name="simple-icons:linkedin" class="w-6 h-6" />
+          <span class="sr-only">LinkedIn</span>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Right column: Image -->
+    <div class="w-full md:w-1/2 flex items-center justify-center"></div>
+  </div>
+  
+  <!-- Scroll down indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <a href="#about" class="text-zinc-400 hover:text-white transition-colors">
+      <!-- <Icon name="mdi:chevron-down" class="w-8 h-8" /> -->
+      <span class="sr-only">Scroll Down</span>
+    </a>
+  </div>
+</section>

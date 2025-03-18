@@ -1,0 +1,436 @@
+---
+// Import the Icon component
+import { Icon } from 'astro-icon/components';
+
+// List of technologies with Simple Icons - updated with your copy
+const technologies = [
+  { 
+    name: 'Astro', 
+    icon: 'simple-icons:astro', 
+    description: 'Astro is my main framework for working on websites, it puts speed and performance first, just as I do with my work and learning.', 
+    proficiency: 3,  // Intermediate
+    experience: '7 months'
+  },
+  { 
+    name: 'TailwindCSS', 
+    icon: 'simple-icons:tailwindcss', 
+    description: 'I use it as a convinient replacement for nearly every CSS attribute out there, for every possible project.', 
+    proficiency: 3,  // Intermediate
+    experience: '7 months'
+  },
+  { 
+    name: 'TypeScript', 
+    icon: 'simple-icons:typescript', 
+    description: 'It\'s recommended in every Astro project, so as a side effect I had to ensure type-safety of my code everywhere neccessary. And of course I use it to ensure a better structure of my code.', 
+    proficiency: 1,  // Learning
+    experience: 'Learning'
+  },
+  { 
+    name: 'JavaScript', 
+    icon: 'simple-icons:javascript', 
+    description: 'That\'s the backbone of everything I do. It is a priority for me to keep a good structure for code maintainability and readability.', 
+    proficiency: 3,  // Intermediate
+    experience: '1.5+ years'
+  },
+  { 
+    name: 'HTML', 
+    icon: 'simple-icons:html5', 
+    description: 'It\'s not fireworks, though I learned it across several years through different means, and now for the past 7 months I\'ve been leveraging the knowledge I gained in the past.', 
+    proficiency: 3,  // Intermediate
+    experience: '1.5+ years'
+  },
+  { 
+    name: 'CSS', 
+    icon: 'simple-icons:css', 
+    description: 'I try to avoid when possible because of my use of TailwindCSS, but if it is required, I am able to create some stylings that Tailwind does not cover.', 
+    proficiency: 3,  // Intermediate
+    experience: '1.5+ years'
+  },
+  { 
+    name: 'GitHub', 
+    icon: 'simple-icons:github', 
+    description: 'It is my primary platform for version control and collaborative development. What else could it be?', 
+    proficiency: 3,  // Intermediate
+    experience: '7 months'
+  },
+  { 
+    name: 'GitLab', 
+    icon: 'simple-icons:gitlab', 
+    description: 'I stumbled upon GitLab just because my first ever client had his website develop with it. After working with it for a while, I think that I am able to navigate through it\'s UI fluently and adapt to a client\'s preffered way of creating code history.', 
+    proficiency: 2,  // Beginner
+    experience: 'Beginner'
+  },
+  { 
+    name: 'WordPress', 
+    icon: 'simple-icons:wordpress', 
+    description: 'It is the first thing that practially got me into web development. It stuck for a while until I just got straight out frustrated with how limited and not customisable it is, and after that I started my journey with Astro.', 
+    proficiency: 3,  // Intermediate
+    experience: '12 months'
+  },
+  { 
+    name: 'Vercel', 
+    icon: 'simple-icons:vercel', 
+    description: 'That\'s the thing I am learning now to deploy my Astro projects without compromises of Github Pages. And it is also free :D.', 
+    proficiency: 1,  // Learning
+    experience: '1 month'
+  },
+  { 
+    name: 'GitHub Pages', 
+    icon: 'simple-icons:githubpages', 
+    description: 'It turns out GitHub is able to host static pages for free :D. It is a no brainer for me to use stuff that\'s free. C\'mon who am I to not use free stuff?\n\nOf course Github Pages are limited, but I am a smart guy and I overcame any problems that came with deployment on it. Then I realised that I could just use free version of Vercel. —__—', 
+    proficiency: 3,  // Intermediate
+    experience: '4 months'
+  },
+  { 
+    name: 'AI', 
+    icon: 'simple-icons:claude', 
+    description: 'I used a lot of models through nearly the last 2 years for work and I think I have a solid grasp on how to use AI\'s for supercharging productivity whilst keeping the relationship between me and it healthy.  am against total vibe coding and pro responsible use of AI.', 
+    proficiency: 3,  // Intermediate
+    experience: '18 months'
+  }
+];
+
+const philosophies = [
+  {
+    title: 'Efficient Teamwork',
+    description: 'Building strong relationships while maintaining high productivity and clear communication.'
+  },
+  {
+    title: 'Personal Discipline',
+    description: 'Focused and dedicated, prioritizing professional growth and maintaining a healthy work-life balance.'
+  },
+  {
+    title: 'Result-Driven',
+    description: 'Committed to achieving desired outcomes with determination and minimal compromises.'
+  }
+];
+---
+
+<section id="skills" class="py-20 bg-zinc-900">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold text-center mb-16">Technical Skills</h2>
+    
+    <!-- Add the bubble container here -->
+    <div id="bubbles-container" class="relative w-full h-[400px] lg:mb-20 mb-10"></div>
+    
+    <!-- Pre-load icons in a separate hidden container that won't be cleared -->
+    <div id="tech-icons-preload" class="hidden">
+      {technologies.map((tech) => (
+        <div data-tech-icon={tech.icon} class="tech-icon-template">
+          <Icon name={tech.icon} class="w-12 h-12 text-white" aria-hidden="true" />
+        </div>
+      ))}
+    </div>
+
+    <h2 class="text-4xl font-bold text-center mb-16">Work Philosophy</h2>
+    
+    <div class="grid md:grid-cols-3 gap-8">
+      {philosophies.map(philosophy => (
+        <div class="bg-zinc-900/50 backdrop-blur-sm p-6 rounded-xl hover:transform hover:-translate-y-2 transition-transform">
+          <h3 class="text-xl font-semibold mb-4">{philosophy.title}</h3>
+          <p class="text-zinc-400">{philosophy.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Tech modal styled like project modals -->
+  <div id="tech-modal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 backdrop-blur-sm opacity-0 transition-opacity duration-300 hidden">
+    <div class="bg-zinc-900/90 backdrop-blur-md rounded-lg max-w-2xl w-full scale-95 opacity-0 transition-all duration-300 shadow-xl border border-zinc-700/50 max-h-[80vh] overflow-y-auto scrollbar-hide mx-10">
+      <div class="sticky top-0 z-10 bg-zinc-900/90 backdrop-blur-md pt-8 pb-4 px-8">
+        <div class="flex justify-between items-start">
+          <div class="flex items-center flex-row gap-4 mb-6">
+            <div id="modal-icon-container" class="w-16 h-16 flex items-center justify-center">
+              <!-- Icon will be dynamically inserted here -->
+            </div>
+            <h3 id="modal-title" class="text-2xl font-bold"></h3>
+          </div>
+          
+          <button 
+            id="modal-close"
+            class="text-zinc-400 hover:text-white -mt-2 -mr-2 p-1"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+      <div class="p-8 pt-0">
+       
+        
+        <div class="space-y-6">
+          <!-- Description -->
+          <div>
+            <h4 class="text-lg font-semibold mb-2">My case</h4>
+            <p id="modal-description" class="text-zinc-400 whitespace-pre-line"></p>
+          </div>
+          
+          <!-- Proficiency indicator -->
+          <div>
+            <h4 class="text-lg font-semibold mb-3">Proficiency Level</h4>
+            <div class="flex items-center">
+              <div class="w-full bg-zinc-800 rounded-full h-2.5 mr-2">
+                <div id="proficiency-bar" class="bg-emerald-500 h-2.5 rounded-full" style="width: 0%"></div>
+              </div>
+              <span id="proficiency-label" class="text-sm text-zinc-400 min-w-[80px] text-right"></span>
+            </div>
+          </div>
+          
+          <!-- Other details in a grid -->
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <h4 class="text-lg font-semibold mb-2">Experience</h4>
+              <p id="modal-experience" class="text-zinc-400"></p>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold mb-2">Projects</h4>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-zinc-800 rounded-full text-sm text-zinc-300">
+                  This Portfolio
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Add some CSS for the bubble animations */
+  .tech-bubble {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    will-change: transform;
+    top: 50%;  /* Position from center */
+    left: 50%;
+  }
+
+  #bubbles-container.active .tech-bubble {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+</style>
+
+<script>
+  import { BubbleLayout, type TechBubble } from '../scripts/bubbles';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Define proper interface for tech data with stronger typing
+    interface TechData {
+      technologies: TechBubble[];
+    }
+    
+    const techData: TechData = {
+      technologies: [
+        { name: 'Astro', icon: 'simple-icons:astro', description: 'Astro is my main framework for working on websites, it puts speed and performance first, just as I do with my work and learning.', proficiency: 3, experience: '7 months' },
+        { name: 'TailwindCSS', icon: 'simple-icons:tailwindcss', description: 'I use it as a convinient replacement for nearly every CSS attribute out there, for every possible project.', proficiency: 3, experience: '7 months' },
+        { name: 'TypeScript', icon: 'simple-icons:typescript', description: 'It\'s recommended in every Astro project, so as a side effect I had to ensure type-safety of my code everywhere neccessary. And of course I use it to ensure a better structure of my code.', proficiency: 1, experience: 'Learning' },
+        { name: 'JavaScript', icon: 'simple-icons:javascript', description: 'That\'s the backbone of everything I do. It is a priority for me to keep a good structure for code maintainability and readability.', proficiency: 3, experience: '1.5+ years' },
+        { name: 'HTML', icon: 'simple-icons:html5', description: 'It\'s not fireworks, though I learned it across several years through different means, and now for the past 7 months I\'ve been leveraging the knowledge I gained in the past.', proficiency: 3, experience: '1.5+ years' },
+        { name: 'CSS', icon: 'simple-icons:css', description: 'I try to avoid when possible because of my use of TailwindCSS, but if it is required, I am able to create some stylings that Tailwind does not cover.', proficiency: 3, experience: '1.5+ years' },
+        { name: 'GitHub', icon: 'simple-icons:github', description: 'It is my primary platform for version control and collaborative development. What else could it be?', proficiency: 3, experience: '7 months' },
+        { name: 'GitLab', icon: 'simple-icons:gitlab', description: 'I stumbled upon GitLab just because my first ever client had his website develop with it. After working with it for a while, I think that I am able to navigate through it\'s UI fluently and adapt to a client\'s preffered way of creating code history.', proficiency: 2, experience: 'Beginner' },
+        { name: 'WordPress', icon: 'simple-icons:wordpress', description: 'It is the first thing that practially got me into web development. It stuck for a while until I just got straight out frustrated with how limited and not customisable it is, and after that I started my journey with Astro.', proficiency: 3, experience: '12 months' },
+        { name: 'Vercel', icon: 'simple-icons:vercel', description: 'That\'s the thing I am learning now to deploy my Astro projects without compromises of Github Pages. And it is also free :D.', proficiency: 1, experience: '1 month' },
+        { name: 'GitHub Pages', icon: 'simple-icons:githubpages', description: 'It turns out GitHub is able to host static pages for free :D. It is a no brainer for me to use stuff that\'s free. C\'mon who am I to not use free stuff?\n\nOf course Github Pages are limited, but I am a smart guy and I overcame any problems that came with deployment on it. Then I realised that I could just use free version of Vercel. —__—', proficiency: 3, experience: '4 months' },
+        { name: 'AI', icon: 'simple-icons:claude', description: 'I used a lot of models through nearly the last 2 years for work and I think I have a solid grasp on how to use AI\'s for supercharging productivity whilst keeping the relationship between me and it healthy. I am against total vibe coding and pro responsible use of AI.', proficiency: 3, experience: '18 months' }
+      ]
+    };
+
+    try {
+      // Initialize the bubble layout
+      const layout = new BubbleLayout('bubbles-container', techData.technologies);
+
+      // Cleanup on page unload
+      window.addEventListener('unload', () => {
+        layout.destroy();
+      });
+    } catch (error) {
+      console.error('Failed to initialize bubble layout:', error);
+    }
+
+    // Use proper type assertions for DOM elements
+    const modal = document.getElementById('tech-modal') as HTMLDivElement | null;
+    const modalContent = modal?.querySelector('div') as HTMLDivElement | null;
+    const modalIconContainer = document.getElementById('modal-icon-container') as HTMLDivElement | null;
+    const modalTitle = document.getElementById('modal-title') as HTMLHeadingElement | null;
+    const modalDescription = document.getElementById('modal-description') as HTMLParagraphElement | null;
+    const modalExperience = document.getElementById('modal-experience') as HTMLParagraphElement | null;
+    const modalClose = document.getElementById('modal-close') as HTMLButtonElement | null;
+    const proficiencyBar = document.getElementById('proficiency-bar') as HTMLDivElement | null;
+    const proficiencyLabel = document.getElementById('proficiency-label') as HTMLSpanElement | null;
+
+    // Function to open modal with animation
+    const openModal = (): void => {
+      if (!modal) return;
+      
+      // First make visible but transparent
+      modal.classList.remove('hidden');
+      
+      // Force browser reflow
+      void modal.offsetWidth;
+      
+      // Add opacity for fade-in
+      modal.classList.add('opacity-100');
+      
+      // Animate the modal content
+      if (modalContent) {
+        setTimeout(() => {
+          modalContent.classList.remove('scale-95', 'opacity-0');
+          modalContent.classList.add('scale-100', 'opacity-100');
+        }, 10);
+      }
+      
+      // Prevent body scrolling
+      document.body.style.overflow = 'hidden';
+    };
+
+    // Function to close modal with animation
+    const closeModal = (): void => {
+      if (!modal) return;
+      
+      // First fade out the content
+      if (modalContent) {
+        modalContent.classList.remove('scale-100', 'opacity-100');
+        modalContent.classList.add('scale-95', 'opacity-0');
+      }
+      
+      // Then fade out the backdrop
+      modal.classList.remove('opacity-100');
+      
+      // Finally hide the modal after animations complete
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 300);
+    };
+
+    // Interface for proficiency info
+    interface ProficiencyInfo {
+      label: string;
+      percentage: number;
+    }
+    
+    // Function to get proficiency label and percentage
+    const getProficiencyInfo = (level: number): ProficiencyInfo => {
+      const labels: Record<number, string> = {
+        1: 'Learning',
+        2: 'Beginner',
+        3: 'Intermediate',
+        4: 'Advanced',
+        5: 'Expert'
+      };
+      
+      // Calculate percentage (1-5 scale to 0-100%)
+      const percentage = (level / 5) * 100;
+      
+      return {
+        label: labels[level] || 'Unknown',
+        percentage: percentage
+      };
+    };
+
+    // Event delegation for bubble clicks with proper type handling
+    const bubblesContainer = document.getElementById('bubbles-container');
+    if (bubblesContainer) {
+      bubblesContainer.addEventListener('click', (event: MouseEvent) => {
+        const target = event.target as HTMLElement;
+        const bubble = target.closest('.tech-bubble') as HTMLElement | null;
+        if (!bubble) return;
+        
+        // Safely parse the tech index
+        const techIndexAttr = bubble.getAttribute('data-tech-index');
+        if (!techIndexAttr) return;
+        
+        const techIndex = parseInt(techIndexAttr, 10);
+        if (isNaN(techIndex)) return;
+        
+        const tech = techData.technologies[techIndex];
+        if (!tech || !modalIconContainer || !modalTitle || !modalDescription || !modalExperience) return;
+        
+        // Clear previous icon
+        modalIconContainer.innerHTML = '';
+        
+        // Try to get the SVG icon with proper type handling
+        const svg = bubble.querySelector('svg');
+        if (svg) {
+          const iconElement = svg.cloneNode(true) as SVGElement;
+          iconElement.classList.add('w-8', 'h-8');
+          modalIconContainer.appendChild(iconElement);
+        } else {
+          // Fallback to text initials
+          modalIconContainer.textContent = tech.name.substring(0, 2).toUpperCase();
+        }
+        
+        // Update modal content
+        modalTitle.textContent = tech.name;
+        modalDescription.textContent = tech.description;
+        modalExperience.textContent = tech.experience;
+        
+        // Update proficiency bar and label with null checks
+        if (proficiencyBar && proficiencyLabel) {
+          const profInfo = getProficiencyInfo(tech.proficiency);
+          proficiencyBar.style.width = `${profInfo.percentage}%`;
+          proficiencyLabel.textContent = profInfo.label;
+          
+          // Color the bar based on level using switch for type safety
+          proficiencyBar.className = 'h-2.5 rounded-full';
+          
+          switch (true) {
+            case tech.proficiency <= 1:
+              proficiencyBar.classList.add('bg-blue-500'); // Learning
+              break;
+            case tech.proficiency <= 2:
+              proficiencyBar.classList.add('bg-emerald-500'); // Beginner
+              break;
+            case tech.proficiency <= 3:
+              proficiencyBar.classList.add('bg-yellow-500'); // Intermediate
+              break;
+            default:
+              proficiencyBar.classList.add('bg-amber-500'); // Advanced/Expert
+          }
+        }
+        
+        // Show modal with animation
+        openModal();
+      });
+    }
+
+    // Close modal when clicking close button with type checking
+    if (modalClose) {
+      modalClose.addEventListener('click', closeModal);
+    }
+
+    // Close modal when clicking outside with proper event typing
+    if (modal) {
+      modal.addEventListener('click', (event: MouseEvent) => {
+        if (event.target === modal) {
+          closeModal();
+        }
+      });
+    }
+
+    // Close modal when pressing Escape key with proper event typing
+    document.addEventListener('keydown', (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+        closeModal();
+      }
+    });
+  });
+</script>
