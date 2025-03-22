@@ -28,3 +28,6 @@ pnpm-debug.log*
 
 # gimp files
 **/*.xcf
+public/call_up_memoji.xcf
+public/figuring_out_memoji.xcf
+public/idea_memoji.xcf
