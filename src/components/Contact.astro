@@ -1,45 +1,113 @@
 ---
+import Footer from "./Footer.astro"
+import FormModal from "./forms/FormModal.astro"
 ---
-
-<!-- <section id="contact" class="py-20 px-4" x-data="{ isOpen: false }">
-  <div class="max-w-6xl mx-auto text-center">
-    <h2 class="text-4xl font-bold mb-8">Let's Work Together</h2>
-    <button
-      @click="isOpen = true"
-      class="inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full text-white font-medium hover:opacity-90 transition-opacity"
-    >
-      Get in Touch
-    </button>
-  </div>
-
---><!-- Modal --><!--
-  <div
-    x-show="isOpen"
-    x-transition
-    class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50"
-  >
-    <div
-      @click.away="isOpen = false"
-      class="bg-zinc-900 rounded-xl p-8 max-w-md w-full"
-    >
-      <h3 class="text-2xl font-bold mb-6">Contact Me</h3>
-      <form class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium mb-2">Name</label>
-          <input type="text" class="w-full px-4 py-2 rounded-lg bg-zinc-800 border border-zinc-700 focus:outline-none focus:border-blue-500" />
-        </div>
-        <div>
-          <label class="block text-sm font-medium mb-2">Email</label>
-          <input type="email" class="w-full px-4 py-2 rounded-lg bg-zinc-800 border border-zinc-700 focus:outline-none focus:border-blue-500" />
-        </div>
-        <div>
-          <label class="block text-sm font-medium mb-2">Message</label>
-          <textarea rows="4" class="w-full px-4 py-2 rounded-lg bg-zinc-800 border border-zinc-700 focus:outline-none focus:border-blue-500"></textarea>
-        </div>
-        <button type="submit" class="w-full py-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg font-medium">
-          Send Message
-        </button>
-      </form>
+<section id="contact" class="h-screen relative flex-col">
+  <section  class="flex justify-center items-center px-4 relative h-[90%]">
+    <div class="max-w-6xl flex justify-center items-center flex-col text-center">
+      <img 
+        src="/figuring_out_memoji.png" 
+        alt="Grzegorz's Memoji" 
+        class="-z-10 absolute top-6 sm:top-1/2 sm:-translate-y-1/2 -right-12 sm:-right-32 xl:w-[40rem] lg:w-[30rem] md:w-[25rem] sm:w-[20rem] w-[15rem]"
+      />
+      <img 
+        src="/idea_memoji.png" 
+        alt="Grzegorz's Memoji" 
+        class="-z-10 absolute bottom-6 sm:top-1/2 sm:-translate-y-1/2 -left-10 sm:-left-20 xl:w-[40rem] lg:w-[30rem] md:w-[25rem] sm:w-[20rem] w-[15rem]"
+      />
+      <h2 class="text-3xl sm:text-4xl font-bold mb-8">Let's Work Together</h2>
+      <button
+        id="contact-button"
+        class="inline-block text-base leading-none px-5 py-3 sm:text-lg sm:px-8 sm:py-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full text-white font-medium hover:opacity-90 transition-all hover:shadow-lg hover:shadow-blue-500/20 outline-none"
+      >
+        Get in Touch
+      </button>
     </div>
-  </div>
-</section> -->
+
+    <!-- Modal with consistent styling and behavior -->
+    <div
+      id="contact-modal"
+      class="fixed inset-0 flex items-center justify-center p-4 z-50 bg-black/60 backdrop-blur-sm opacity-0 transition-all duration-300 hidden"
+    >
+      <div
+        class="modal-content bg-zinc-900/90 backdrop-blur-md rounded-lg max-w-4xl w-full scale-95 opacity-0 transition-all duration-300 shadow-xl border border-zinc-700/50 overflow-hidden"
+      >
+        <FormModal />
+      </div>
+    </div>
+  </section>
+  <Footer />
+</section>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get DOM elements with type safety
+    const modal = document.getElementById('contact-modal') as HTMLDivElement | null;
+    const modalContent = modal?.querySelector('.modal-content') as HTMLDivElement | null;
+    const openButton = document.getElementById('contact-button') as HTMLButtonElement | null;
+    const closeButton = document.getElementById('modal-close-btn') as HTMLButtonElement | null;
+    
+    // Bail early if elements aren't found
+    if (!modal || !modalContent || !openButton || !closeButton) {
+      console.error('Contact modal elements not found');
+      return;
+    }
+    
+    // Function to open modal with animation (matching Projects.astro and Skills.astro)
+    const openModal = (): void => {
+      // First remove hidden class
+
+      document.documentElement.classList.add('overflow-hidden');
+
+      modal.classList.remove('hidden');
+      
+      // Force browser reflow
+      void modal.offsetWidth;
+      
+      // Add opacity for fade-in
+      modal.classList.add('opacity-100');
+      
+      // Animate the modal content
+      setTimeout(() => {
+        modalContent.classList.remove('scale-95', 'opacity-0');
+        modalContent.classList.add('scale-100', 'opacity-100');
+      }, 10);
+      
+      // Prevent body scrolling
+      document.body.style.overflow = 'hidden';
+    };
+
+    // Function to close modal with animation
+    const closeModal = (): void => {
+      // First fade out the content
+      modalContent.classList.remove('scale-100', 'opacity-100');
+      modalContent.classList.add('scale-95', 'opacity-0');
+      
+      // Then fade out the backdrop
+      modal.classList.remove('opacity-100');
+      
+      // Wait for transition to complete before hiding
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        document.documentElement.classList.remove('overflow-hidden');
+      }, 300);
+    };
+
+    // Add event listeners
+    openButton.addEventListener('click', openModal);
+    closeButton.addEventListener('click', closeModal);
+    
+    // Close modal when clicking outside
+    modal.addEventListener('click', (event: MouseEvent) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Close modal when pressing Escape key
+    document.addEventListener('keydown', (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+        closeModal();
+      }
+    });
+});
+</script>

@@ -1,0 +1,58 @@
+<form id="email-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
+    <!-- Web3Forms Access Key -->
+    <input type="hidden" name="access_key" value="c327a4fe-587f-4d48-b82b-46f79fbed699" />
+    
+    <!-- Custom Email Subject -->
+    <input type="hidden" name="subject" value="New Message from Portfolio Site" />
+    
+    <!-- reCAPTCHA for Spam Protection -->
+    <input type="hidden" name="recaptcha_response" id="recaptchaResponse" />
+    
+    <div>
+        <label class="block text-sm font-medium mb-2">Subject</label>
+        <input 
+        type="text" 
+        name="subject"
+        class="w-full px-4 py-2 rounded-lg bg-zinc-800 border border-zinc-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors" 
+        required
+        />
+    </div>
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div>
+            <label class="block text-sm font-medium mb-2">Name</label>
+            <input 
+            type="text" 
+            name="name"
+            class="w-full px-4 py-2 rounded-lg bg-zinc-800 border border-zinc-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors" 
+            required
+            />
+        </div>
+        <div>
+            <label class="block text-sm font-medium mb-2">Email</label>
+            <input 
+            type="email" 
+            name="email"
+            class="w-full px-4 py-2 rounded-lg bg-zinc-800 border border-zinc-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors" 
+            required
+            />
+        </div>
+    </div>
+    <div>
+        <label class="block text-sm font-medium mb-2">Message</label>
+        <textarea 
+        rows="4" 
+        name="message"
+        class="w-full px-4 py-2 rounded-lg bg-zinc-800 border border-zinc-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors scrollbar-hide"
+        required
+        ></textarea>
+    </div>
+    <div id="email-result"></div>
+    <div class="flex justify-end flex-row w-full">
+        <button 
+            type="submit" 
+            class="w-full py-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg font-medium hover:opacity-90 transition-opacity"
+        >
+            Send Message
+        </button>
+    </div>
+</form>

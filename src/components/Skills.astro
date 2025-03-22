@@ -92,43 +92,163 @@ const technologies = [
 
 const philosophies = [
   {
-    title: 'Efficient Teamwork',
-    description: 'Building strong relationships while maintaining high productivity and clear communication.'
+    title: 'Efficient & Friendly Teamwork',
+    description: 'Building strong relationships while maintaining high productivity and clear communication.',
+    icon: 'heroicons:user-group-solid',
+    example: 'When leading the Opyleo Landing Page project, I prioritized creating a friendly atmosphere to establish a pleasant workspace. This helped ensure efficient team communication for identifying and resolving problems, sharing knowledge, and maintaining consistent progress.',
+    applications: [
+      'Establish clear communication channels and response expectations',
+      'Document decisions and progress for asynchronous collaboration',
+      'Provide constructive feedback while maintaining a positive atmosphere',
+      'Value others\' perspectives and incorporate diverse viewpoints'
+    ],
+    benefits: [
+      'Faster problem resolution',
+      'Higher quality deliverables',
+      'Positive team culture',
+      'Knowledge sharing'
+    ]
   },
   {
     title: 'Personal Discipline',
-    description: 'Focused and dedicated, prioritizing professional growth and maintaining a healthy work-life balance.'
+    description: 'Focused and dedicated, prioritizing professional growth and maintaining a healthy work-life balance.',
+    icon: 'heroicons:clock-solid',
+    example: 'Discipline is without doubt a part of my life, I like doing stuff that’s challenging, eg. going to a gym when physically I do not feel like it and I can set a work schedule for myself and stick to it. This of course positively influences my work quality and project engagement.',
+    applications: [
+      'Create and follow daily structured schedules with specific goals',
+      'Balance deep work sessions with appropriate breaks',
+      'Continuously learn and improve at work and beyond',
+      'Maintain clear separation between work and personal time'
+    ],
+    benefits: [
+      'Consistent delivery',
+      'Sustainable productivity',
+      'Continuous self improvement',
+      'Reduced burnout risk'
+    ]
   },
   {
     title: 'Result-Driven',
-    description: 'Committed to achieving desired outcomes with determination and minimal compromises.'
+    description: 'Committed to achieving desired outcomes with determination and minimal compromises.',
+    icon: 'heroicons:flag-solid',
+    example: 'During my work on any project, ones that are displayed on this site or not, I face several challenges and I nearly never opt out for an easier solution that’s not entirely aligned with my inital vision.',
+    applications: [
+      'Define clear objectives and success criteria at the start of projects',
+      'Focus on delivering tangible value rather than just completing tasks',
+      'Persist through challenges until finding optimal solutions',
+      'Regularly validate progress against desired outcomes'
+    ],
+    benefits: [
+      'Higher client satisfaction',
+      'More impactful deliverables',
+      'Better problem-solving skills',
+      'Innovative solutions'
+    ]
   }
 ];
 ---
 
-<section id="skills" class="py-20 bg-zinc-900">
+<section id="skills" class="pb-20 bg-zinc-900">
   <div class="container mx-auto px-4">
-    <h2 class="text-4xl font-bold text-center mb-16">Technical Skills</h2>
+    <div class="min-h-screen flex flex-col items-center justify-center">
+      <h2 class="text-4xl font-bold text-center mb-36">Technical Skills</h2>
+      
+      <!-- Add the bubble container here -->
+      <div id="bubbles-container" class="relative w-full h-[400px] lg:mb-20 mb-10"></div>
+      
+      <!-- Pre-load icons in a separate hidden container that won't be cleared -->
+      <div id="tech-icons-preload" class="hidden">
+        {technologies.map((tech) => (
+          <div data-tech-icon={tech.icon} class="tech-icon-template">
+            <Icon name={tech.icon} class="w-12 h-12 text-white" aria-hidden="true" />
+          </div>
+        ))}
+      </div>
+
+    </div>
+
+    <h2 class="text-4xl font-bold text-center mb-16 mt-20">Work Philosophy</h2>
     
-    <!-- Add the bubble container here -->
-    <div id="bubbles-container" class="relative w-full h-[400px] lg:mb-20 mb-10"></div>
-    
-    <!-- Pre-load icons in a separate hidden container that won't be cleared -->
-    <div id="tech-icons-preload" class="hidden">
-      {technologies.map((tech) => (
-        <div data-tech-icon={tech.icon} class="tech-icon-template">
-          <Icon name={tech.icon} class="w-12 h-12 text-white" aria-hidden="true" />
+    <div class="grid md:grid-cols-3 gap-8">
+      {philosophies.map(philosophy => (
+        <div class="philosophy-card bg-zinc-800/50 backdrop-blur-sm p-6 rounded-xl hover:transform hover:-translate-y-2 transition-transform duration-300 cursor-pointer">
+          <div class="flex items-center mb-4">
+            <div class="w-6 h-6 flex items-center justify-center mr-3">
+              {philosophy.icon && (
+                <Icon name={philosophy.icon} class="w-full h-full" />
+              )}
+            </div>
+            <h3 class="text-xl font-semibold">{philosophy.title}</h3>
+          </div>
+          <p class="text-zinc-400">{philosophy.description}</p>
         </div>
       ))}
     </div>
 
-    <h2 class="text-4xl font-bold text-center mb-16">Work Philosophy</h2>
-    
-    <div class="grid md:grid-cols-3 gap-8">
-      {philosophies.map(philosophy => (
-        <div class="bg-zinc-900/50 backdrop-blur-sm p-6 rounded-xl hover:transform hover:-translate-y-2 transition-transform">
-          <h3 class="text-xl font-semibold mb-4">{philosophy.title}</h3>
-          <p class="text-zinc-400">{philosophy.description}</p>
+    <div id="philosophy-modals">
+      {philosophies.map((philosophy, index) => (
+        <div
+          class="philosophy-modal fixed inset-0 flex items-center justify-center p-4 z-50 bg-black/60 backdrop-blur-sm opacity-0 transition-all duration-300 hidden"
+          data-index={index}
+        >
+          <div class="modal-content bg-zinc-900/90 backdrop-blur-md rounded-lg max-w-2xl w-full scale-95 opacity-0 max-h-[80vh] transition-all duration-300 shadow-xl border border-zinc-700/50 overflow-y-auto scrollbar-hide relative">
+            <!-- Header area with sticky close button -->
+            <div class="sticky top-0 z-10 bg-zinc-900/90 backdrop-blur-md pt-8 pb-4 px-8">
+              <div class="flex justify-between items-start">
+                <div class="flex items-center">
+                  <div class="w-6 h-6 flex items-center justify-center mr-3">
+                    <Icon name={philosophy.icon} class="w-full h-full" />
+                  </div>
+                  <h3 class="text-2xl font-bold">{philosophy.title}</h3>
+                </div>
+                <button 
+                  class="philosophy-close-btn text-zinc-400 hover:text-white -mt-2 -mr-2 p-1"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Content area -->
+            <div class="p-8 pt-0">              
+              <div class="space-y-6">
+                <!-- Real-world example -->
+                <div>
+                  <h4 class="text-lg font-semibold mb-2">In Practice</h4>
+                  <p class="text-zinc-400 whitespace-pre-line">{philosophy.example}</p>
+                </div>
+                
+                <!-- How I apply this -->
+                <div>
+                  <h4 class="text-lg font-semibold mb-2">How I Apply This</h4>
+                  <ul class="list-disc pl-5 space-y-2 text-zinc-400">
+                    {philosophy.applications.map(app => (
+                      <li>{app}</li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <!-- Benefits -->
+                <div>
+                  <h4 class="text-lg font-semibold mb-2">Benefits</h4>
+                  <div class="grid grid-cols-2 gap-4">
+                    {philosophy.benefits.map(benefit => (
+                      <div class="bg-zinc-800/50 p-3 rounded-lg flex items-start space-x-2">
+                        <div class="text-white">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                          </svg>
+                        </div>
+                        <span>{benefit}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       ))}
     </div>
@@ -238,7 +358,7 @@ const philosophies = [
     
     const techData: TechData = {
       technologies: [
-        { name: 'Astro', icon: 'simple-icons:astro', description: 'Astro is my main framework for working on websites, it puts speed and performance first, just as I do with my work and learning.', proficiency: 3, experience: '7 months' },
+        { name: 'Astro.js', icon: 'simple-icons:astro', description: 'Astro.js is my main framework for working on websites, it puts speed and performance first, just as I do with my work and learning.', proficiency: 3, experience: '7 months' },
         { name: 'TailwindCSS', icon: 'simple-icons:tailwindcss', description: 'I use it as a convinient replacement for nearly every CSS attribute out there, for every possible project.', proficiency: 3, experience: '7 months' },
         { name: 'TypeScript', icon: 'simple-icons:typescript', description: 'It\'s recommended in every Astro project, so as a side effect I had to ensure type-safety of my code everywhere neccessary. And of course I use it to ensure a better structure of my code.', proficiency: 1, experience: 'Learning' },
         { name: 'JavaScript', icon: 'simple-icons:javascript', description: 'That\'s the backbone of everything I do. It is a priority for me to keep a good structure for code maintainability and readability.', proficiency: 3, experience: '1.5+ years' },
@@ -280,11 +400,13 @@ const philosophies = [
     const openModal = (): void => {
       if (!modal) return;
       
+      document.documentElement.classList.add('overflow-hidden');
+
       // First make visible but transparent
       modal.classList.remove('hidden');
       
       // Force browser reflow
-      void modal.offsetWidth;
+      void (modal as HTMLElement).offsetWidth;
       
       // Add opacity for fade-in
       modal.classList.add('opacity-100');
@@ -305,6 +427,8 @@ const philosophies = [
     const closeModal = (): void => {
       if (!modal) return;
       
+      document.documentElement.classList.remove('overflow-hidden');
+
       // First fade out the content
       if (modalContent) {
         modalContent.classList.remove('scale-100', 'opacity-100');
@@ -430,6 +554,93 @@ const philosophies = [
     document.addEventListener('keydown', (event: KeyboardEvent) => {
       if (event.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
         closeModal();
+      }
+    });
+
+    // Philosophy cards modal functionality
+    const philosophyCards = document.querySelectorAll('.philosophy-card');
+    const philosophyModals = document.querySelectorAll('.philosophy-modal');
+    const closeButtons = document.querySelectorAll('.philosophy-close-btn');
+    
+    // Function to open modal
+    const openPhilosophyModal = (index: number) => {
+      const modal = philosophyModals[index] as HTMLElement;
+      if (!modal) return;
+      
+      document.documentElement.classList.add('overflow-hidden');
+      
+      // First remove hidden
+      modal.classList.remove('hidden');
+      
+      // Force browser reflow
+      void modal.offsetWidth;
+      
+      // Then fade in
+      modal.classList.add('opacity-100');
+      
+      const content = modal.querySelector('.modal-content');
+      if (content) {
+        content.classList.remove('scale-95', 'opacity-0');
+        content.classList.add('scale-100', 'opacity-100');
+      }
+      
+      // Prevent body scrolling
+      document.body.style.overflow = 'hidden';
+    };
+    
+    // Function to close modal
+    const closePhilosophyModal = (modal: HTMLElement) => {
+      if (!modal) return;
+      
+      document.documentElement.classList.remove('overflow-hidden');
+      
+      // First fade out
+      modal.classList.remove('opacity-100');
+      
+      const content = modal.querySelector('.modal-content');
+      if (content) {
+        content.classList.remove('scale-100', 'opacity-100');
+        content.classList.add('scale-95', 'opacity-0');
+      }
+      
+      // Wait for animation to complete before hiding
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 300);
+    };
+    
+    // Add click events to philosophy cards
+    philosophyCards.forEach((card, index) => {
+      card.addEventListener('click', () => {
+        openPhilosophyModal(index);
+      });
+    });
+    
+    // Add click events to close buttons
+    closeButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const modal = button.closest('.philosophy-modal') as HTMLElement;
+        closePhilosophyModal(modal);
+      });
+    });
+    
+    // Close modal when clicking outside
+    philosophyModals.forEach((modal) => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closePhilosophyModal(modal as HTMLElement);
+        }
+      });
+    });
+    
+    // Close modal on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const visibleModal = document.querySelector('.philosophy-modal:not(.hidden)') as HTMLElement;
+        if (visibleModal) {
+          closePhilosophyModal(visibleModal);
+        }
       }
     });
   });

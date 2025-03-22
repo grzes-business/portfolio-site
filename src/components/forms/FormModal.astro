@@ -1,0 +1,167 @@
+---
+import FormCall from "./FormCall.astro"
+import FormEmail from "./FormEmail.astro"
+---
+<!-- Header area with sticky close button -->
+<div class="sticky top-0 z-10 pt-8 pb-4 px-8">
+    <div class="flex justify-between items-start">
+        <h3 class="text-2xl font-bold">Contact Me</h3>
+        <button 
+        id="modal-close-btn"
+        class="text-zinc-400 hover:text-white -mt-2 -mr-2 p-1"
+        >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        </button>
+    </div>
+
+    <!-- Tab selector -->
+    <div class="flex mt-4 border border-zinc-700/50 rounded-lg overflow-hidden">
+        <button 
+        id="email-tab-btn" 
+        class="tab-btn active flex-1 py-2 text-center transition-colors"
+        >
+        Email Message
+        </button>
+        <button 
+        id="call-tab-btn" 
+        class="tab-btn flex-1 py-2 text-center transition-colors"
+        >
+        Schedule a Call
+        </button>
+    </div>
+</div>
+
+<!-- Content area with tabs -->
+<div id="tab-container" class="p-8 pt-0 transition-all duration-300 ease-in-out">
+    <!-- Email Contact Form Tab -->
+    <div id="email-tab" class="tab-content transition-opacity duration-300">
+        <FormEmail />
+    </div>
+
+    <!-- Schedule Call Tab -->
+    <div id="call-tab" class="tab-content hidden transition-opacity duration-300">
+        <FormCall />
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    // Tab functionality
+    const tabBtns = document.querySelectorAll<HTMLElement>('.tab-btn');
+    const tabContents = document.querySelectorAll<HTMLElement>('.tab-content');
+    const tabContainer = document.getElementById('tab-container') as HTMLElement;
+    
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Get current active tab
+            const currentActiveBtn = document.querySelector('.tab-btn.active') as HTMLElement;
+            if (currentActiveBtn === btn) return; // Skip if clicking the current tab
+            
+            const currentTabId = currentActiveBtn?.id.replace('-btn', '');
+            const currentTab = document.getElementById(currentTabId);
+            
+            // Get target tab
+            const targetTabId = btn.id.replace('-btn', '');
+            const targetTab = document.getElementById(targetTabId);
+            
+            if (currentTab && targetTab) {
+                // 1. Set fixed height on container to current tab height
+                tabContainer.style.height = `${currentTab.offsetHeight + 32}px`;
+                
+                // 2. Fade out current tab
+                currentTab.style.opacity = '0';
+                
+                // 3. After fade out completes
+                setTimeout(() => {
+                    // Update tab buttons
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    updateTabStyles();
+                    
+                    // Hide current tab and show target tab (but still transparent)
+                    currentTab.classList.add('hidden');
+                    targetTab.classList.remove('hidden');
+                    targetTab.style.opacity = '0';
+                    
+                    // 4. Animate height to target tab height
+                    tabContainer.style.height = `${targetTab.offsetHeight + 32}px`;
+                    
+                    // 5. Fade in target tab
+                    setTimeout(() => {
+                        targetTab.style.opacity = '1';
+                        
+                        // 6. After height transition completes, reset to auto height
+                        setTimeout(() => {
+                            tabContainer.style.height = 'auto';
+                        }, 300);
+                    }, 50);
+                }, 300);
+            }
+        });
+    });
+    
+    // Style active/inactive tabs
+    function updateTabStyles(): void {
+        tabBtns.forEach(btn => {
+        if (btn.classList.contains('active')) {
+            btn.classList.add('bg-zinc-800', 'text-white');
+            btn.classList.remove('bg-zinc-900', 'text-zinc-400');
+        } else {
+            btn.classList.add('bg-zinc-900', 'text-zinc-400');
+            btn.classList.remove('bg-zinc-800', 'text-white');
+        }
+        });
+    }
+    
+    // Initial styling
+    updateTabStyles();
+    
+    // Simple email form submission
+    const forms = document.querySelectorAll('form');
+    const result = document.getElementById('email-result');
+    forms.forEach(form => {
+        if (form && result) {
+            form.addEventListener('submit', function(e) {
+                console.log("submitting form");
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                const object = Object.fromEntries(formData);
+                const json = JSON.stringify(object);
+                
+                result.innerHTML = "Please wait...";
+                
+                fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                    },
+                    body: json
+                })
+                .then(async (response) => {
+                    let json = await response.json();
+                    if (response.status == 200) {
+                        result.innerHTML = "Form submitted successfully";
+                    } else {
+                        console.log(response);
+                        result.innerHTML = json.message;
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    result.innerHTML = "Something went wrong!";
+                })
+                .then(function() {
+                    form.reset();
+                    setTimeout(() => {
+                        result.style.display = "none";
+                    }, 3000);
+                });
+            });
+        }
+    });
+    });
+ </script>

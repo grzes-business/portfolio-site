@@ -2,73 +2,85 @@
 const projects = [
   {
     title: 'Opyleo Landing Page',
-    description: 'Led the development of a mobile landing page for a book selling app, managing the team and ensuring project success.',
+    description: 'Led the development of a mobile landing page for a book selling app, managed the team, consulted with the prospect, thus learned a lot.',
     tags: ['Team Lead', 'Mobile First', 'Landing Page'],
     image: 'opyleo.png',
     fullDescription: `
-      As the team lead for the Opyleo Landing Page project, I was responsible for:
-      • Managing a team of developers and designers
-      • Implementing mobile-first design principles
-      • Ensuring high performance and SEO optimization
-      • Coordinating with stakeholders to meet project requirements
-      • Delivering the project within the specified timeline
+      This project is the most influencial for my growth yet I have undertaken, because it learned me how to manage and coordinate work in a team and also I had to understand prospect’s needs and how to communicate efficiently in order to deliver the best results.
+
+      Besides being a leader of the project, I had a significant code contributions to the project.
+
+      To be precise I had implemented:
+      • Slide-like scrolling
+      • Card’s template (and a lot of width & height responsiveness with it → I almost passed away)
+      • Implementation of Swiper.js with the card template and integration with team’s member api calling mechanism
+      • Deployment with GitHub Pages
+      • Draggable bubbles
     `,
-    technologies: ['HTML', 'CSS', 'JavaScript', 'Mobile-First Design', 'SEO'],
+    technologies: ['Astro.js', 'TailwindCSS', 'JavaScript', 'TypeScript', 'GitHub Pages', 'Swiper.js'],
     role: 'Team Lead & Lead Developer',
-    duration: '2 months'
+    duration: '4 months'
   },
   {
     title: 'Newsletter Integration',
-    description: 'Created custom newsletter forms with MailerLite integration for improved user engagement.',
+    description: 'Created custom newsletter forms with MailerLite integration for collecting leads from new site\'s blog.',
     tags: ['MailerLite', 'Forms', 'Integration'],
     image: 'newsletter.jpg',
     fullDescription: `
-      Developed two distinct newsletter integration solutions:
-      • Custom-designed subscription forms
-      • Seamless MailerLite API integration
-      • Analytics tracking implementation
-      • A/B testing capabilities
-      • GDPR-compliant data collection
+      I designed and developed two custom forms with custom submitting & error validation script with displayal of custom error messages, and legal page for newsletter's service.
+
+      Creating a custom designed form with MailerLite was not so straightforward. In order to ensure functionality of the form I had to start with the initial MailerLite default’s form HTML and strip it to essential parts for submitting the form. 
+
+      I have created the for a company which code’s is stored on GitLab, so I had to learn how to work in a professional code environment and how to comply with the company’s rules for creating code history.
     `,
-    technologies: ['Astro.js', 'TailwindCSS', 'JavaScript', 'MailerLite API'],
+    technologies: ['Astro.js', 'TailwindCSS', 'JavaScript', 'MailerLite', 'GitLab'],
     role: 'Frontend Developer',
-    duration: '3 weeks'
+    duration: '2 weeks'
   },
   {
     title: 'Video Guide Platform',
-    description: 'Developed a two-part video guide platform with user registration and content delivery.',
+    description: 'Developed & designed a video guide and a signup page for it.',
     tags: ['Video Platform', 'MailerLite', 'Educational'],
     image: 'video-guide.jpg',
     fullDescription: `
-      Created a comprehensive video guide platform featuring:
-      • Secure user registration and authentication
-      • Custom video player with progress tracking
-      • Responsive design for all devices
-      • Protected content delivery system
-      • User progress persistence
+      I designed and developed a completely custom video guide and a custom signup form with processing through MailerLite’s automation.
+
+      I incorporated the Plyr video player for the video on the signup page and for every other video in the guide. The guide’s videos are displayed through a custom modal.
+
+      The hardest part of the job was adding a loading overlay to each video’s thumbnail. While trying to implement it, I stumbled upon navigation tracking, which made things unnecessarily complicated. It turned out it was unnecessary it — I just used the first frame of each video as the video card thumbnail.
+
+      I lost a bit of time on that, but it was a good lesson learned anyways :P
     `,
-    technologies: ['Video.js', 'User Authentication', 'Responsive Design'],
-    role: 'Full Stack Developer',
+    technologies: ['Astro.js', 'TailwindCSS', 'JavaScript', 'Plyr.js', 'MailerLite', 'Responsive Design'],
+    role: 'Frontend Developer',
     duration: '1.5 months'
   }
 ];
 ---
 
-<section id="projects" class="py-20 px-4 bg-zinc-900/50">
+<section id="projects" class="min-h-screen py-20 px-4 bg-zinc-900/50">
   <div class="max-w-6xl mx-auto">
     <h2 class="text-4xl font-bold text-center mb-16">Featured Work</h2>
     
     <div id="project-list" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       {projects.map((project, index) => (
         <div 
-          class="bg-zinc-800/50 rounded-xl overflow-hidden hover:transform hover:-translate-y-2 transition-transform cursor-pointer"
+          class="group bg-zinc-800/50 rounded-xl overflow-hidden transition-all duration-300 cursor-pointer border border-transparent hover:border-purple-500/30 hover:shadow-lg hover:shadow-blue-500/20 hover:-translate-y-2"
         >
-          <img src={project.image} alt={project.title} class="w-full h-48 object-cover" />
-          <div class="p-6">
+          <div class="relative overflow-hidden">
+            <img src={project.image} alt={project.title} class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+              <span class="text-sm font-medium text-white px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 backdrop-blur-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                View
+              </span>
+            </div>
+          </div>
+          <div class="p-6 flex justify-between flex-col">
+            <h3 class="text-xl font-medium mb-3 group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-500 group-hover:text-transparent group-hover:bg-clip-text transition-all duration-300">{project.title}</h3>
             <p class="text-zinc-400 mb-4">{project.description}</p>
             <div class="flex flex-wrap gap-2">
               {project.tags.map(tag => (
-                <span class="px-3 py-1 bg-zinc-700/50 rounded-full text-sm text-zinc-300">
+                <span class="px-3 py-1 bg-zinc-700/50 rounded-full text-sm text-zinc-300 transition-colors duration-300 group-hover:bg-zinc-700">
                   {tag}
                 </span>
               ))}
@@ -146,6 +158,7 @@ const projects = [
           modal.classList.add('hidden', 'opacity-0');
           
           // Find the modal content div (first child of the modal)
+
           const modalContent = modal.querySelector('.modal-content');
 
           // Find the close button in each modal and add click event
@@ -159,6 +172,9 @@ const projects = [
 
         // Function to open modal with animation
         const openModal = (modal: any, modalContent: any) => {
+          
+          document.documentElement.classList.add('overflow-hidden');
+
           // First remove hidden class
           modal.classList.remove('hidden');
           modalContent.classList.remove('hidden');
@@ -181,6 +197,9 @@ const projects = [
 
         // Function to close modal with animation
         const closeModal = (modal: any, modalContent: any) => {
+
+          document.documentElement.classList.remove('overflow-hidden');
+
           // First remove visible classes
           modal.classList.remove('opacity-100');
           modal.classList.add('opacity-0');
