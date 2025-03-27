@@ -9,15 +9,17 @@ import Footer from '../components/Footer.astro';
 
 <Layout title="Grzegorz Diaconescu - Web Developer">
   <div id="loading-overlay" class="fixed inset-0 bg-zinc-950 flex flex-col justify-center items-center z-50 transition-opacity duration-500">
-    <div class="relative flex items-center">
-      <div class="overflow-hidden">
-        <h2 id="loading-text" class="sm:text-5xl text-2xl bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text font-bold tracking-wide transform -translate-x-full transition-transform ease-out duration-700 pb-2">Let's build together</h2>
-      </div>
-      <div id="loading-dots" class="ml-3 opacity-0 translate-y-1 transition-all duration-500 ease-out">
-        <div class="flex space-x-2">
-          <div class="w-4 h-4 rounded-full bg-blue-500 animate-bounce delay-0"></div>
-          <div class="w-4 h-4 rounded-full bg-indigo-500 animate-bounce delay-75"></div>
-          <div class="w-4 h-4 rounded-full bg-purple-500 animate-bounce delay-150"></div>
+    <div class="flex flex-col items-center relative">
+      <div class="flex items-center justify-center transition-all duration-500 ease-in-out" id="loading-container">
+        <div class="overflow-hidden">
+          <h2 id="loading-text" class="sm:text-5xl text-2xl bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text font-bold tracking-wide transform -translate-x-full transition-transform ease-out duration-700 pb-2">Let's build together</h2>
+        </div>
+        <div id="loading-dots-container" class="opacity-0 ml-3 w-0 max-w-0 overflow-hidden transition-all duration-500 ease-in-out">
+          <div id="loading-dots" class="flex space-x-2 whitespace-nowrap pt-2">
+            <div class="w-4 h-4 rounded-full bg-blue-500 animate-bounce delay-0"></div>
+            <div class="w-4 h-4 rounded-full bg-indigo-500 animate-bounce delay-75"></div>
+            <div class="w-4 h-4 rounded-full bg-purple-500 animate-bounce delay-150"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -34,7 +36,7 @@ import Footer from '../components/Footer.astro';
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     // Debug mode - controls everything
-    const debugMode = false;
+    const debugMode = true;
     let debugInProgress = false;
     
     // Track if resources are loaded
@@ -65,7 +67,11 @@ import Footer from '../components/Footer.astro';
         // Force the loading indicator to show for testing
         debugInProgress = true;
         resourcesLoaded = false;
-        showLoadingDots();
+        
+        // Wait a bit after text animation before showing dots
+        setTimeout(() => {
+          showLoadingDots();
+        }, 2000);
         
         // For testing, set a longer timeout
         console.log("before timeout - will wait 5 seconds");
@@ -82,11 +88,27 @@ import Footer from '../components/Footer.astro';
       return false;
     };
 
-    // Function to show loading dots
+    // Function to show loading dots with a smoother animation
     const showLoadingDots = () => {
-      const loadingDots = document.getElementById('loading-dots');
-      loadingDots?.classList.remove('opacity-0', 'translate-y-1');
-      loadingDots?.classList.add('opacity-100', 'translate-y-0');
+      const dotsContainer = document.getElementById('loading-dots-container');
+      const loadingContainer = document.getElementById('loading-container');
+      
+      if (dotsContainer && loadingContainer) {
+        // First make container visible but still 0 width
+        dotsContainer.classList.remove('opacity-0');
+        dotsContainer.classList.add('opacity-100');
+        
+        // A small delay before expanding width for smoother transition
+        setTimeout(() => {
+          // Remove max width constraint and allow dots to take natural width
+          dotsContainer.classList.remove('w-0', 'max-w-0');
+          dotsContainer.classList.add('w-auto', 'max-w-full');
+          
+          // Center the entire container
+          loadingContainer.classList.add('transform', 'transition-transform', 'duration-500');
+          loadingContainer.classList.add('-translate-x-3');
+        }, 100);
+      }
     };
 
     // Animate text sliding in from the left and set a delay after
