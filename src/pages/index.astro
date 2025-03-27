@@ -9,8 +9,17 @@ import Footer from '../components/Footer.astro';
 
 <Layout title="Grzegorz Diaconescu - Web Developer">
   <div id="loading-overlay" class="fixed inset-0 bg-zinc-950 flex flex-col justify-center items-center z-50 transition-opacity duration-500">
-    <div class="overflow-hidden">
-      <h2 id="loading-text" class="sm:text-5xl text-2xl bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text font-bold tracking-wide transform -translate-x-full transition-transform ease-out duration-700 pb-2">Let's build together</h2>
+    <div class="relative flex items-center">
+      <div class="overflow-hidden">
+        <h2 id="loading-text" class="sm:text-5xl text-2xl bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text font-bold tracking-wide transform -translate-x-full transition-transform ease-out duration-700 pb-2">Let's build together</h2>
+      </div>
+      <div id="loading-dots" class="ml-3 opacity-0 translate-y-1 transition-all duration-500 ease-out">
+        <div class="flex space-x-2">
+          <div class="w-4 h-4 rounded-full bg-blue-500 animate-bounce delay-0"></div>
+          <div class="w-4 h-4 rounded-full bg-indigo-500 animate-bounce delay-75"></div>
+          <div class="w-4 h-4 rounded-full bg-purple-500 animate-bounce delay-150"></div>
+        </div>
+      </div>
     </div>
   </div>
   
@@ -24,12 +33,21 @@ import Footer from '../components/Footer.astro';
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // Debug mode - controls everything
+    const debugMode = false;
+    let debugInProgress = false;
+    
     // Track if resources are loaded
     let resourcesLoaded = false;
     let animationComplete = false;
 
     // Function to hide overlay when conditions are met
     const hideOverlayIfReady = () => {
+      // Don't hide if debug mode is forcing it to stay visible
+      if (debugMode && debugInProgress) {
+        return;
+      }
+      
       if (animationComplete && resourcesLoaded) {
         const overlay = document.getElementById('loading-overlay');
         overlay?.classList.add('opacity-0');
@@ -37,6 +55,38 @@ import Footer from '../components/Footer.astro';
           overlay?.classList.add('pointer-events-none');
         }, 500);
       }
+    };
+
+    // Add a debug function
+    const debugLoading = () => {
+      if (debugMode) {
+        console.log("Debug mode active - forcing loading state");
+        
+        // Force the loading indicator to show for testing
+        debugInProgress = true;
+        resourcesLoaded = false;
+        showLoadingDots();
+        
+        // For testing, set a longer timeout
+        console.log("before timeout - will wait 5 seconds");
+        setTimeout(() => {
+          console.log("after timeout - allowing overlay to hide");
+          debugInProgress = false;
+          resourcesLoaded = true;
+          hideOverlayIfReady();
+        }, 5000);
+        
+        // Disable the fallback timeout during debug mode
+        return true;
+      }
+      return false;
+    };
+
+    // Function to show loading dots
+    const showLoadingDots = () => {
+      const loadingDots = document.getElementById('loading-dots');
+      loadingDots?.classList.remove('opacity-0', 'translate-y-1');
+      loadingDots?.classList.add('opacity-100', 'translate-y-0');
     };
 
     // Animate text sliding in from the left and set a delay after
@@ -47,8 +97,12 @@ import Footer from '../components/Footer.astro';
       // Wait for text animation to complete (700ms)
       setTimeout(() => {
         animationComplete = true;
-        hideOverlayIfReady();
-      }, 1500); // 700ms for animation
+        
+        // Only check if we should hide if not in debug mode
+        if (!debugLoading()) {
+          hideOverlayIfReady();
+        }
+      }, 1500); // 700ms for animation + extra time
     }, 300);
   
     // Check when all resources are loaded
@@ -57,13 +111,35 @@ import Footer from '../components/Footer.astro';
       hideOverlayIfReady();
     });
     
-    // Fallback to hide the overlay after a certain time
+    // Show loading dots if loading takes too long (unless in debug mode)
     setTimeout(() => {
-      const overlay = document.getElementById('loading-overlay');
-      overlay?.classList.add('opacity-0');
-      setTimeout(() => {
-        overlay?.classList.add('pointer-events-none');
-      }, 500);
-    }, 3000); // Extended timeout to allow for text animation + delay
+      if (!resourcesLoaded && !debugInProgress) {
+        showLoadingDots();
+      }
+    }, 2500);
+    
+    // Fallback to hide the overlay after a certain time (unless in debug mode)
+    setTimeout(() => {
+      if (!debugInProgress) {
+        const overlay = document.getElementById('loading-overlay');
+        overlay?.classList.add('opacity-0');
+        setTimeout(() => {
+          overlay?.classList.add('pointer-events-none');
+        }, 500);
+      }
+    }, 8000); // Extended timeout to allow for text animation + delay
   });
 </script>
+
+<style>
+  /* Custom delay classes for bounce animation */
+  .delay-0 {
+    animation-delay: 0ms;
+  }
+  .delay-75 {
+    animation-delay: 75ms;
+  }
+  .delay-150 {
+    animation-delay: 150ms;
+  }
+</style>
