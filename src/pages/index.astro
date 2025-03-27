@@ -12,13 +12,13 @@ import Footer from '../components/Footer.astro';
     <div class="flex flex-col items-center relative">
       <div class="flex items-center justify-center transition-all duration-500 ease-in-out" id="loading-container">
         <div class="overflow-hidden">
-          <h2 id="loading-text" class="sm:text-5xl text-2xl bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text font-bold tracking-wide transform -translate-x-full transition-transform ease-out duration-700 pb-2">Let's build together</h2>
+          <h2 id="loading-text" class="sm:text-5xl h-16 !leading-[4rem] text-2xl bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text font-bold tracking-wide transform -translate-x-full transition-transform ease-out duration-700">Let's build together</h2>
         </div>
-        <div id="loading-dots-container" class="opacity-0 ml-3 w-0 max-w-0 overflow-hidden transition-all duration-500 ease-in-out">
-          <div id="loading-dots" class="flex space-x-2 whitespace-nowrap pt-2">
-            <div class="w-4 h-4 rounded-full bg-blue-500 animate-bounce delay-0"></div>
-            <div class="w-4 h-4 rounded-full bg-indigo-500 animate-bounce delay-75"></div>
-            <div class="w-4 h-4 rounded-full bg-purple-500 animate-bounce delay-150"></div>
+        <div id="loading-dots-container" class="sm:h-6 h-3 opacity-0 sm:ml-3 ml-2 w-0 max-w-0 overflow-hidden transition-all duration-500 ease-in-out">
+          <div id="loading-dots" class="flex sm:space-x-2 space-x-1 whitespace-nowrap sm:pt-2 pt-1">
+            <div class="sm:w-4 sm:h-4 w-2 h-2 rounded-full bg-blue-500 animate-bounce delay-0"></div>
+            <div class="sm:w-4 sm:h-4 w-2 h-2 rounded-full bg-indigo-500 animate-bounce delay-75"></div>
+            <div class="sm:w-4 sm:h-4 w-2 h-2 rounded-full bg-purple-500 animate-bounce delay-150"></div>
           </div>
         </div>
       </div>
@@ -36,7 +36,7 @@ import Footer from '../components/Footer.astro';
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     // Debug mode - controls everything
-    const debugMode = true;
+    const debugMode = false;
     let debugInProgress = false;
     
     // Track if resources are loaded
