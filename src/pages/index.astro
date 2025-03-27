@@ -8,6 +8,12 @@ import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="Grzegorz Diaconescu - Web Developer">
+  <div id="loading-overlay" class="fixed inset-0 bg-zinc-950 flex flex-col justify-center items-center z-50 transition-opacity duration-500">
+    <div class="overflow-hidden">
+      <h2 id="loading-text" class="sm:text-5xl text-2xl bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text font-bold tracking-wide transform -translate-x-full transition-transform ease-out duration-700 pb-2">Let's build together</h2>
+    </div>
+  </div>
+  
   <main>
     <Hero />
     <Skills />
@@ -15,3 +21,49 @@ import Footer from '../components/Footer.astro';
     <Contact />
   </main>
 </Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Track if resources are loaded
+    let resourcesLoaded = false;
+    let animationComplete = false;
+
+    // Function to hide overlay when conditions are met
+    const hideOverlayIfReady = () => {
+      if (animationComplete && resourcesLoaded) {
+        const overlay = document.getElementById('loading-overlay');
+        overlay?.classList.add('opacity-0');
+        setTimeout(() => {
+          overlay?.classList.add('pointer-events-none');
+        }, 500);
+      }
+    };
+
+    // Animate text sliding in from the left and set a delay after
+    setTimeout(() => {
+      const loadingText = document.getElementById('loading-text');
+      loadingText?.classList.remove('-translate-x-full');
+      
+      // Wait for text animation to complete (700ms)
+      setTimeout(() => {
+        animationComplete = true;
+        hideOverlayIfReady();
+      }, 1500); // 700ms for animation
+    }, 300);
+  
+    // Check when all resources are loaded
+    window.addEventListener('load', () => {
+      resourcesLoaded = true;
+      hideOverlayIfReady();
+    });
+    
+    // Fallback to hide the overlay after a certain time
+    setTimeout(() => {
+      const overlay = document.getElementById('loading-overlay');
+      overlay?.classList.add('opacity-0');
+      setTimeout(() => {
+        overlay?.classList.add('pointer-events-none');
+      }, 500);
+    }, 3000); // Extended timeout to allow for text animation + delay
+  });
+</script>
