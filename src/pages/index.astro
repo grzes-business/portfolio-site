@@ -51,11 +51,11 @@ import Footer from '../components/Footer.astro';
       }
       
       if (animationComplete && resourcesLoaded) {
-        document.documentElement.classList.remove('overflow-hidden');
         const overlay = document.getElementById('loading-overlay');
         overlay?.classList.add('opacity-0');
         setTimeout(() => {
           overlay?.classList.add('pointer-events-none');
+          document.documentElement.classList.remove('overflow-hidden');
         }, 500);
       }
     };
