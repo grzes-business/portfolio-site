@@ -2,7 +2,8 @@ import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import icon from "astro-icon"; // Import the icon integration
 export default defineConfig({
-  base: "portfolio-site",
+  site: "https://grzes-business.github.io",
+  base: "/portfolio-site",
   integrations: [
     tailwind(),
     icon({

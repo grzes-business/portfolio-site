@@ -1,10 +1,15 @@
 ---
+import { Image } from 'astro:assets';
+import opyleoImg from "../assets/opyleo.png";
+import newsletterImg from "../assets/newsletter.jpg";
+import videoGuideImg from "../assets/video-guide.jpg";
+
 const projects = [
   {
     title: 'Opyleo Landing Page',
     description: 'Led the development of a mobile landing page for a book selling app, managed the team, consulted with the prospect, thus learned a lot.',
     tags: ['Team Lead', 'Mobile First', 'Landing Page'],
-    image: 'portfolio-site/src/assets/opyleo.png',
+    image: opyleoImg,
     fullDescription: `
       This project is the most influencial for my growth yet I have undertaken, because it learned me how to manage and coordinate work in a team and also I had to understand prospect’s needs and how to communicate efficiently in order to deliver the best results.
 
@@ -25,7 +30,7 @@ const projects = [
     title: 'Newsletter Integration',
     description: 'Created custom newsletter forms with MailerLite integration for collecting leads from new site\'s blog.',
     tags: ['MailerLite', 'Forms', 'Integration'],
-    image: 'portfolio-site/src/assets/newsletter.jpg',
+    image: newsletterImg,
     fullDescription: `
       I designed and developed two custom forms with custom submitting & error validation script with displayal of custom error messages, and legal page for newsletter's service.
 
@@ -41,7 +46,7 @@ const projects = [
     title: 'Video Guide Platform',
     description: 'Developed & designed a video guide and a signup page for it.',
     tags: ['Video Platform', 'MailerLite', 'Educational'],
-    image: 'portfolio-site/src/assets/video-guide.jpg',
+    image: videoGuideImg,
     fullDescription: `
       I designed and developed a completely custom video guide and a custom signup form with processing through MailerLite’s automation.
 
@@ -68,7 +73,7 @@ const projects = [
           class="group bg-zinc-800/50 rounded-xl overflow-hidden transition-all duration-300 cursor-pointer border border-transparent hover:border-purple-500/30 hover:shadow-lg hover:shadow-blue-500/20 hover:-translate-y-2"
         >
           <div class="relative overflow-hidden">
-            <img src={project.image} alt={project.title} class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
+            <Image src={project.image} alt={project.title} class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
             <div class="absolute inset-0 bg-gradient-to-t from-zinc-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
               <span class="text-sm font-medium text-white px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 backdrop-blur-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                 View
@@ -113,7 +118,7 @@ const projects = [
         
         <!-- Content area -->
         <div class="p-8 pt-0">
-          <img src={project.image} alt={project.title} class="aspect-[3/2] w-full object-cover rounded-lg mb-6" />
+          <Image src={project.image} alt={project.title} class="aspect-[3/2] w-full object-cover rounded-lg mb-6" />
           
           <div class="space-y-4">
             <div>

@@ -51,6 +51,7 @@ import Footer from '../components/Footer.astro';
       }
       
       if (animationComplete && resourcesLoaded) {
+        document.documentElement.classList.remove('overflow-hidden');
         const overlay = document.getElementById('loading-overlay');
         overlay?.classList.add('opacity-0');
         setTimeout(() => {
@@ -113,6 +114,7 @@ import Footer from '../components/Footer.astro';
 
     // Animate text sliding in from the left and set a delay after
     setTimeout(() => {
+      document.documentElement.classList.add('overflow-hidden');
       const loadingText = document.getElementById('loading-text');
       loadingText?.classList.remove('-translate-x-full');
       

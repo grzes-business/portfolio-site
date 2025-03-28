@@ -1,16 +1,17 @@
 ---
 // Import any necessary components or utilities
 import { Icon } from 'astro-icon/components';
+import Image from 'astro/components/Image.astro';
+import callUpMemoji from '../assets/call_up_memoji.png';
 ---
 
 
 <section class="min-h-screen flex items-center justify-center px-4 py-16 relative overflow-hidden">
   <!-- Background effect (subtle gradient or particles) -->
   <div class="absolute inset-0 bg-gradient-to-br from-zinc-900 to-black opacity-50 z-0"></div>
-  
-  <img 
-    src=`portfolio-site/src/assets/call_up_memoji.png`
-    alt="Grzegorz's Memoji" 
+  <Image 
+    src={callUpMemoji}
+    alt="Grzegorz's Memoji"
     class="z-10 absolute bottom-0 -right-32 xl:w-[52rem] lg:w-[48rem] w-[36rem] opacity-20 md:opacity-100"
   />
   <!-- Main content -->
