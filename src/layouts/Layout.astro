@@ -1,6 +1,8 @@
 ---
 import '@fontsource-variable/inter';
 
+import favicon from '../assets/favicon.png';
+
 interface Props {
   title: string;
   description?: string;
@@ -18,7 +20,7 @@ const {
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="src/assets/favicon.png" />
+    <link rel="icon" type="image/svg+xml" href={favicon.src} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
