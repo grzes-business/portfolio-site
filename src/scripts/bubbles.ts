@@ -4,6 +4,7 @@ export interface TechBubble {
   description: string;
   proficiency: number;
   experience: string;
+  usage: string[];
 }
 
 interface BubbleNode {

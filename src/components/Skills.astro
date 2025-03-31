@@ -4,90 +4,18 @@ import { Icon } from 'astro-icon/components';
 
 // List of technologies with Simple Icons - updated with your copy
 const technologies = [
-  { 
-    name: 'Astro', 
-    icon: 'simple-icons:astro', 
-    description: 'Astro is my main framework for working on websites, it puts speed and performance first, just as I do with my work and learning.', 
-    proficiency: 3,  // Intermediate
-    experience: '7 months'
-  },
-  { 
-    name: 'TailwindCSS', 
-    icon: 'simple-icons:tailwindcss', 
-    description: 'I use it as a convinient replacement for nearly every CSS attribute out there, for every possible project.', 
-    proficiency: 3,  // Intermediate
-    experience: '7 months'
-  },
-  { 
-    name: 'TypeScript', 
-    icon: 'simple-icons:typescript', 
-    description: 'It\'s recommended in every Astro project, so as a side effect I had to ensure type-safety of my code everywhere neccessary. And of course I use it to ensure a better structure of my code.', 
-    proficiency: 1,  // Learning
-    experience: 'Learning'
-  },
-  { 
-    name: 'JavaScript', 
-    icon: 'simple-icons:javascript', 
-    description: 'That\'s the backbone of everything I do. It is a priority for me to keep a good structure for code maintainability and readability.', 
-    proficiency: 3,  // Intermediate
-    experience: '1.5+ years'
-  },
-  { 
-    name: 'HTML', 
-    icon: 'simple-icons:html5', 
-    description: 'It\'s not fireworks, though I learned it across several years through different means, and now for the past 7 months I\'ve been leveraging the knowledge I gained in the past.', 
-    proficiency: 3,  // Intermediate
-    experience: '1.5+ years'
-  },
-  { 
-    name: 'CSS', 
-    icon: 'simple-icons:css', 
-    description: 'I try to avoid when possible because of my use of TailwindCSS, but if it is required, I am able to create some stylings that Tailwind does not cover.', 
-    proficiency: 3,  // Intermediate
-    experience: '1.5+ years'
-  },
-  { 
-    name: 'GitHub', 
-    icon: 'simple-icons:github', 
-    description: 'It is my primary platform for version control and collaborative development. What else could it be?', 
-    proficiency: 3,  // Intermediate
-    experience: '7 months'
-  },
-  { 
-    name: 'GitLab', 
-    icon: 'simple-icons:gitlab', 
-    description: 'I stumbled upon GitLab just because my first ever client had his website develop with it. After working with it for a while, I think that I am able to navigate through it\'s UI fluently and adapt to a client\'s preffered way of creating code history.', 
-    proficiency: 2,  // Beginner
-    experience: 'Beginner'
-  },
-  { 
-    name: 'WordPress', 
-    icon: 'simple-icons:wordpress', 
-    description: 'It is the first thing that practially got me into web development. It stuck for a while until I just got straight out frustrated with how limited and not customisable it is, and after that I started my journey with Astro.', 
-    proficiency: 3,  // Intermediate
-    experience: '12 months'
-  },
-  { 
-    name: 'Vercel', 
-    icon: 'simple-icons:vercel', 
-    description: 'That\'s the thing I am learning now to deploy my Astro projects without compromises of Github Pages. And it is also free :D.', 
-    proficiency: 1,  // Learning
-    experience: '1 month'
-  },
-  { 
-    name: 'GitHub Pages', 
-    icon: 'simple-icons:githubpages', 
-    description: 'It turns out GitHub is able to host static pages for free :D. It is a no brainer for me to use stuff that\'s free. C\'mon who am I to not use free stuff?\n\nOf course Github Pages are limited, but I am a smart guy and I overcame any problems that came with deployment on it. Then I realised that I could just use free version of Vercel. —__—', 
-    proficiency: 3,  // Intermediate
-    experience: '4 months'
-  },
-  { 
-    name: 'AI', 
-    icon: 'simple-icons:claude', 
-    description: 'I used a lot of models through nearly the last 2 years for work and I think I have a solid grasp on how to use AI\'s for supercharging productivity whilst keeping the relationship between me and it healthy.  am against total vibe coding and pro responsible use of AI.', 
-    proficiency: 3,  // Intermediate
-    experience: '18 months'
-  }
+  { name: 'Astro.js', icon: 'simple-icons:astro', description: 'Astro.js is my main framework for working on websites, it puts speed and performance first, just as I do with my work and learning.', proficiency: 3, experience: '7 months', usage: ['Opyleo Landing Page', 'Newsletter Integration', 'Video Guide Platform', 'This Portfolio'] },
+  { name: 'TailwindCSS', icon: 'simple-icons:tailwindcss', description: 'I use it as a convinient replacement for nearly every CSS attribute out there, for every possible project.', proficiency: 3, experience: '7 months', usage: ['Every project I do'] },
+  { name: 'TypeScript', icon: 'simple-icons:typescript', description: 'It\'s recommended in every Astro project, so as a side effect I had to ensure type-safety of my code everywhere neccessary. And of course I use it to ensure a better structure of my code.', proficiency: 1, experience: 'Learning', usage: ['Opyleo Landing Page', 'This Portfolio'] },
+  { name: 'JavaScript', icon: 'simple-icons:javascript', description: 'That\'s the backbone of everything I do. It is a priority for me to keep a good structure for code maintainability and readability.', proficiency: 3, experience: '1.5+ years', usage: ['Every project I do'] },
+  { name: 'HTML', icon: 'simple-icons:html5', description: 'It\'s not fireworks, though I learned it across several years through different means, and now for the past 7 months I\'ve been leveraging the knowledge I gained in the past.', proficiency: 3, experience: '1.5+ years', usage: ['Every project I do'] },
+  { name: 'CSS', icon: 'simple-icons:css', description: 'I try to avoid when possible because of my use of TailwindCSS, but if it is required, I am able to create some stylings that Tailwind does not cover.', proficiency: 3, experience: '1.5+ years', usage: ['Whenever TailwindCSS fails'] },
+  { name: 'Git', icon: 'simple-icons:git', description: 'It is my primary tool for version control and collaborative development. What else could it be?', proficiency: 3, experience: '7 months', usage: ['Every project I do'] },
+  { name: 'GitLab', icon: 'simple-icons:gitlab', description: 'I stumbled upon GitLab just because my first ever client had his website develop with it. After working with it for a while, I think that I am able to navigate through it\'s UI fluently and adapt to a client\'s preffered way of creating code history.', proficiency: 2, experience: 'Beginner', usage: ['Newsletter Integration', 'Video Guide Platform'] },
+  { name: 'WordPress', icon: 'simple-icons:wordpress', description: 'It is the first thing that practially got me into web development. It stuck for a while until I just got straight out frustrated with how limited and not customisable it is, and after that I started my journey with Astro.', proficiency: 3, experience: '12 months', usage: ['GetYourBook'] },
+  { name: 'Vercel', icon: 'simple-icons:vercel', description: 'That\'s the thing I am learning now to deploy my Astro projects without compromises of Github Pages. And it is also free :D.', proficiency: 1, experience: '1 month', usage: ['Notion Widgets'] },
+  { name: 'GitHub Pages', icon: 'simple-icons:githubpages', description: 'It turns out GitHub is able to host static pages for free :D. It is a no brainer for me to use stuff that\'s free. C\'mon who am I to not use free stuff?\n\nOf course Github Pages are limited, but I am a smart guy and I overcame any problems that came with deployment on it. Then I realised that I could just use free version of Vercel. —__—', proficiency: 3, experience: '4 months', usage: ['Opyleo Landing Page'] },
+  { name: 'Responsible use of AI', icon: 'simple-icons:claude', description: 'I used a lot of models through nearly the last 2 years for work and I think I have a solid grasp on how to use AI\'s for supercharging productivity whilst keeping the relationship between me and it healthy. I for responsible use of AI and against total vibe coding.', proficiency: 3, experience: '18 months', usage: ['Each project I do'] }
 ];
 
 const philosophies = [
@@ -151,7 +79,7 @@ const philosophies = [
 <section id="skills" class="pb-20 bg-zinc-900">
   <div class="container mx-auto px-4">
     <div class="min-h-screen flex flex-col items-center justify-center">
-      <h2 class="text-4xl font-bold text-center mb-36">Technical Skills</h2>
+      <h2 class="text-4xl font-bold text-center mb-36 mt-8">Technical Skills</h2>
       
       <!-- Add the bubble container here -->
       <div id="bubbles-container" class="relative w-full h-[400px] lg:mb-20 mb-10"></div>
@@ -278,8 +206,6 @@ const philosophies = [
       </div>
       
       <div class="p-8 pt-0">
-       
-        
         <div class="space-y-6">
           <!-- Description -->
           <div>
@@ -299,17 +225,14 @@ const philosophies = [
           </div>
           
           <!-- Other details in a grid -->
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-rows-2 sm:grid-rows-none sm:grid-cols-2 sm:gap-4">
             <div>
               <h4 class="text-lg font-semibold mb-2">Experience</h4>
               <p id="modal-experience" class="text-zinc-400"></p>
             </div>
             <div>
-              <h4 class="text-lg font-semibold mb-2">Projects</h4>
-              <div class="flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-zinc-800 rounded-full text-sm text-zinc-300">
-                  This Portfolio
-                </span>
+              <h4 class="text-lg font-semibold mb-2">Usage</h4>
+              <div class="flex flex-wrap gap-2" id="modal-usage">
               </div>
             </div>
           </div>
@@ -358,18 +281,18 @@ const philosophies = [
     
     const techData: TechData = {
       technologies: [
-        { name: 'Astro.js', icon: 'simple-icons:astro', description: 'Astro.js is my main framework for working on websites, it puts speed and performance first, just as I do with my work and learning.', proficiency: 3, experience: '7 months' },
-        { name: 'TailwindCSS', icon: 'simple-icons:tailwindcss', description: 'I use it as a convinient replacement for nearly every CSS attribute out there, for every possible project.', proficiency: 3, experience: '7 months' },
-        { name: 'TypeScript', icon: 'simple-icons:typescript', description: 'It\'s recommended in every Astro project, so as a side effect I had to ensure type-safety of my code everywhere neccessary. And of course I use it to ensure a better structure of my code.', proficiency: 1, experience: 'Learning' },
-        { name: 'JavaScript', icon: 'simple-icons:javascript', description: 'That\'s the backbone of everything I do. It is a priority for me to keep a good structure for code maintainability and readability.', proficiency: 3, experience: '1.5+ years' },
-        { name: 'HTML', icon: 'simple-icons:html5', description: 'It\'s not fireworks, though I learned it across several years through different means, and now for the past 7 months I\'ve been leveraging the knowledge I gained in the past.', proficiency: 3, experience: '1.5+ years' },
-        { name: 'CSS', icon: 'simple-icons:css', description: 'I try to avoid when possible because of my use of TailwindCSS, but if it is required, I am able to create some stylings that Tailwind does not cover.', proficiency: 3, experience: '1.5+ years' },
-        { name: 'GitHub', icon: 'simple-icons:github', description: 'It is my primary platform for version control and collaborative development. What else could it be?', proficiency: 3, experience: '7 months' },
-        { name: 'GitLab', icon: 'simple-icons:gitlab', description: 'I stumbled upon GitLab just because my first ever client had his website develop with it. After working with it for a while, I think that I am able to navigate through it\'s UI fluently and adapt to a client\'s preffered way of creating code history.', proficiency: 2, experience: 'Beginner' },
-        { name: 'WordPress', icon: 'simple-icons:wordpress', description: 'It is the first thing that practially got me into web development. It stuck for a while until I just got straight out frustrated with how limited and not customisable it is, and after that I started my journey with Astro.', proficiency: 3, experience: '12 months' },
-        { name: 'Vercel', icon: 'simple-icons:vercel', description: 'That\'s the thing I am learning now to deploy my Astro projects without compromises of Github Pages. And it is also free :D.', proficiency: 1, experience: '1 month' },
-        { name: 'GitHub Pages', icon: 'simple-icons:githubpages', description: 'It turns out GitHub is able to host static pages for free :D. It is a no brainer for me to use stuff that\'s free. C\'mon who am I to not use free stuff?\n\nOf course Github Pages are limited, but I am a smart guy and I overcame any problems that came with deployment on it. Then I realised that I could just use free version of Vercel. —__—', proficiency: 3, experience: '4 months' },
-        { name: 'AI', icon: 'simple-icons:claude', description: 'I used a lot of models through nearly the last 2 years for work and I think I have a solid grasp on how to use AI\'s for supercharging productivity whilst keeping the relationship between me and it healthy. I am against total vibe coding and pro responsible use of AI.', proficiency: 3, experience: '18 months' }
+        { name: 'Astro.js', icon: 'simple-icons:astro', description: 'Astro.js is my main framework for working on websites, it puts speed and performance first, just as I do with my work and learning.', proficiency: 3, experience: '7 months', usage: ['Opyleo Landing Page', 'Newsletter Integration', 'Video Guide Platform', 'This Portfolio'] },
+        { name: 'TailwindCSS', icon: 'simple-icons:tailwindcss', description: 'I use it as a convinient replacement for nearly every CSS attribute out there, for every possible project.', proficiency: 3, experience: '7 months', usage: ['Every project I do'] },
+        { name: 'TypeScript', icon: 'simple-icons:typescript', description: 'It\'s recommended in every Astro project, so as a side effect I had to ensure type-safety of my code everywhere neccessary. And of course I use it to ensure a better structure of my code.', proficiency: 1, experience: 'Learning', usage: ['Opyleo Landing Page', 'This Portfolio'] },
+        { name: 'JavaScript', icon: 'simple-icons:javascript', description: 'That\'s the backbone of everything I do. It is a priority for me to keep a good structure for code maintainability and readability.', proficiency: 3, experience: '1.5+ years', usage: ['Every project I do'] },
+        { name: 'HTML', icon: 'simple-icons:html5', description: 'It\'s not fireworks, though I learned it across several years through different means, and now for the past 7 months I\'ve been leveraging the knowledge I gained in the past.', proficiency: 3, experience: '1.5+ years', usage: ['Every project I do'] },
+        { name: 'CSS', icon: 'simple-icons:css', description: 'I try to avoid when possible because of my use of TailwindCSS, but if it is required, I am able to create some stylings that Tailwind does not cover.', proficiency: 3, experience: '1.5+ years', usage: ['Whenever TailwindCSS fails'] },
+        { name: 'Git', icon: 'simple-icons:git', description: 'It is my primary tool for version control and collaborative development. What else could it be?', proficiency: 3, experience: '7 months', usage: ['Every project I do'] },
+        { name: 'GitLab', icon: 'simple-icons:gitlab', description: 'I stumbled upon GitLab just because my first ever client had his website develop with it. After working with it for a while, I think that I am able to navigate through it\'s UI fluently and adapt to a client\'s preffered way of creating code history.', proficiency: 2, experience: 'Beginner', usage: ['Newsletter Integration', 'Video Guide Platform'] },
+        { name: 'WordPress', icon: 'simple-icons:wordpress', description: 'It is the first thing that practially got me into web development. It stuck for a while until I just got straight out frustrated with how limited and not customisable it is, and after that I started my journey with Astro.', proficiency: 3, experience: '12 months', usage: ['GetYourBook'] },
+        { name: 'Vercel', icon: 'simple-icons:vercel', description: 'That\'s the thing I am learning now to deploy my Astro projects without compromises of Github Pages. And it is also free :D.', proficiency: 1, experience: '1 month', usage: ['Notion Widgets'] },
+        { name: 'GitHub Pages', icon: 'simple-icons:githubpages', description: 'It turns out GitHub is able to host static pages for free :D. It is a no brainer for me to use stuff that\'s free. C\'mon who am I to not use free stuff?\n\nOf course Github Pages are limited, but I am a smart guy and I overcame any problems that came with deployment on it. Then I realised that I could just use free version of Vercel. —__—', proficiency: 3, experience: '4 months', usage: ['Opyleo Landing Page'] },
+        { name: 'Responsible use of AI', icon: 'simple-icons:claude', description: 'I used a lot of models through nearly the last 2 years for work and I think I have a solid grasp on how to use AI\'s for supercharging productivity whilst keeping the relationship between me and it healthy. I for responsible use of AI and against total vibe coding.', proficiency: 3, experience: '18 months',usage: ['Each project I do'] }
       ]
     };
 
@@ -392,6 +315,7 @@ const philosophies = [
     const modalTitle = document.getElementById('modal-title') as HTMLHeadingElement | null;
     const modalDescription = document.getElementById('modal-description') as HTMLParagraphElement | null;
     const modalExperience = document.getElementById('modal-experience') as HTMLParagraphElement | null;
+    const modalUsage = document.getElementById('modal-usage') as HTMLDivElement | null;
     const modalClose = document.getElementById('modal-close') as HTMLButtonElement | null;
     const proficiencyBar = document.getElementById('proficiency-bar') as HTMLDivElement | null;
     const proficiencyLabel = document.getElementById('proficiency-label') as HTMLSpanElement | null;
@@ -486,7 +410,7 @@ const philosophies = [
         if (isNaN(techIndex)) return;
         
         const tech = techData.technologies[techIndex];
-        if (!tech || !modalIconContainer || !modalTitle || !modalDescription || !modalExperience) return;
+        if (!tech || !modalIconContainer || !modalTitle || !modalDescription || !modalExperience || !modalUsage) return;
         
         // Clear previous icon
         modalIconContainer.innerHTML = '';
@@ -506,6 +430,18 @@ const philosophies = [
         modalTitle.textContent = tech.name;
         modalDescription.textContent = tech.description;
         modalExperience.textContent = tech.experience;
+        // Clear previous usage tags
+        if (modalUsage) {
+          modalUsage.innerHTML = '';
+          
+          // Add new usage tags
+          tech.usage.forEach(usage => {
+            const usageSpan = document.createElement('span');
+            usageSpan.className = 'px-3 py-1 bg-zinc-800 rounded-full text-sm text-zinc-300 whitespace-nowrap inline-block mr-2 mb-2';
+            usageSpan.textContent = usage;
+            modalUsage.appendChild(usageSpan);
+          });
+        }
         
         // Update proficiency bar and label with null checks
         if (proficiencyBar && proficiencyLabel) {
